@@ -20,7 +20,7 @@
   },
   "monorepo": true,
   "root": "apps/fabric-app",
-  "projects1": {
+  "projects": {
     "fabric-app": {
       "type": "application",
       "root": "apps/fabric-app",
@@ -55,17 +55,6 @@
       "sourceRoot": "libs/shared/src",
       "compilerOptions": {
         "tsConfigPath": "libs/shared/tsconfig.lib.json"
-      }
-    }
-  },
-  "projects": {
-    "fabric-app": {
-      "type": "application",
-      "root": "apps/fabric-app",
-      "entryFile": "main",
-      "sourceRoot": "apps/fabric-app/src",
-      "compilerOptions": {
-        "tsConfigPath": "apps/fabric-app/tsconfig.app.json"
       }
     }
   }
