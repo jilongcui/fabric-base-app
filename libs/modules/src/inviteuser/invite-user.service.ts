@@ -1,6 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Between, DataSource, FindOptionsWhere, Repository, TreeRepository } from 'typeorm';
-// import { User } from '@app/modules/system/user/entities/user.entity';
 import { ApiException } from '@app/common/exceptions/api.exception';
 import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
 import { UserService } from '../user/user.service';
@@ -8,7 +7,6 @@ import { InviteUser } from './entities/invite-user.entity';
 import { User } from '../user/entities/user.entity';
 import { ReqInviteUserListDto, ReqUpdateInviteUserDto } from './dto/request-inviteuser.dto';
 import * as moment from 'moment';
-import { ApiDataResponse } from '@app/common/decorators/api-data-response.decorator';
 
 @Injectable()
 export class InviteUserService {

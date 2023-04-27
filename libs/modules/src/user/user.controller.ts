@@ -32,7 +32,7 @@ import { EmailCodeGuard } from '@app/common/guards/email-code.guard';
 @ApiTags('用户管理')
 @ApiBearerAuth()
 @UseGuards(ThrottlerBehindProxyGuard)
-@Controller('system/user')
+@Controller('user')
 export class UserController {
     constructor(
         private readonly userService: UserService,

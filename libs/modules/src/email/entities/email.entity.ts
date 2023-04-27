@@ -1,4 +1,4 @@
-import { User } from "@app/modules/system/user/entities/user.entity"
+import { User } from "@app/modules/user/entities/user.entity"
 import { ApiHideProperty } from "@nestjs/swagger"
 import { IsNumber, IsOptional } from "class-validator"
 import { Column, CreateDateColumn, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
@@ -44,7 +44,7 @@ export class Email {
     createTime: number
 
     @ApiHideProperty()
-    @ManyToOne(() => User, user => user.orders)
+    @ManyToOne(() => User)
     @JoinColumn({
         name: 'user_id',
     })
