@@ -58,7 +58,7 @@ export class LoginController {
     @Post('login')
     @Public()
     // @UseGuards(ImageCaptchaGuard, LocalAuthGuard)
-    @UseGuards(ImageCaptchaGuard, LocalAuthGuard)
+    @UseGuards(LocalAuthGuard)
     @Keep()
     // @UseGuards(LocalAuthGuard)
     async login(@Body() reqLoginDto: ReqLoginDto, @Req() req: Request, @Res() response: Response) {

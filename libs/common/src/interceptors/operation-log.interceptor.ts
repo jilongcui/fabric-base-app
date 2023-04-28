@@ -73,8 +73,8 @@ export class OperationLogInterceptor implements NestInterceptor {
       const userName = await this.redis.get(`${USER_USERNAME_KEY}:${userId}`)
       operLog.operName = userName
       /* 部门名称 */
-      const deptName = await this.redis.get(`${USER_DEPTNAME_KEY}:${userId}`)
-      operLog.deptName = deptName
+      // const deptName = await this.redis.get(`${USER_DEPTNAME_KEY}:${userId}`)
+      // operLog.deptName = deptName
       /* 请求url */
       operLog.operUrl = request.url
       /* 请求ip */

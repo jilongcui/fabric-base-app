@@ -55,10 +55,10 @@ export class UserService {
             .addSelect('user.password')
             .addSelect('user.securityStatus')
             .addSelect('user.salt')
-            .addSelect('user.dept')
-            .leftJoinAndSelect('user.dept', 'dept')
-            .leftJoinAndSelect('user.identity', 'identity')
-            .leftJoinAndSelect('user.member', 'member')
+            // .addSelect('user.dept')
+            // .leftJoinAndSelect('user.dept', 'dept')
+            // .leftJoinAndSelect('user.identity', 'identity')
+            // .leftJoinAndSelect('user.member', 'member')
             // .innerJoin('member.memberInfo', 'memberInfo')
             .where({
                 userName: username,
@@ -77,10 +77,10 @@ export class UserService {
             .addSelect('user.password')
             .addSelect('user.securityStatus')
             .addSelect('user.salt')
-            .addSelect('user.dept')
-            .leftJoinAndSelect('user.dept', 'dept')
-            .leftJoinAndSelect('user.identity', 'identity')
-            .leftJoinAndSelect('user.member', 'member')
+            // .addSelect('user.dept')
+            // .leftJoinAndSelect('user.dept', 'dept')
+            // .leftJoinAndSelect('user.identity', 'identity')
+            // .leftJoinAndSelect('user.member', 'member')
             // .innerJoin('member.memberInfo', 'memberInfo')
             .where({
                 delFlag: '0',
@@ -111,10 +111,10 @@ export class UserService {
             .addSelect('user.password')
             .addSelect('user.securityStatus')
             .addSelect('user.salt')
-            .addSelect('user.dept')
-            .leftJoinAndSelect('user.dept', 'dept')
-            .leftJoinAndSelect('user.identity', 'identity')
-            .leftJoinAndSelect('user.member', 'member')
+            // .addSelect('user.dept')
+            // .leftJoinAndSelect('user.dept', 'dept')
+            // .leftJoinAndSelect('user.identity', 'identity')
+            // .leftJoinAndSelect('user.member', 'member')
             // .innerJoin('member.memberInfo', 'memberInfo')
             .where({
                 phonenumber: phone,
@@ -133,10 +133,10 @@ export class UserService {
             .addSelect('user.password')
             .addSelect('user.securityStatus')
             .addSelect('user.salt')
-            .addSelect('user.dept')
-            .leftJoinAndSelect('user.dept', 'dept')
-            .leftJoinAndSelect('user.identity', 'identity')
-            .leftJoinAndSelect('user.member', 'member')
+            // .addSelect('user.dept')
+            // .leftJoinAndSelect('user.dept', 'dept')
+            // .leftJoinAndSelect('user.identity', 'identity')
+            // .leftJoinAndSelect('user.member', 'member')
             // .innerJoin('member.memberInfo', 'memberInfo')
             .where({
                 email: email,
@@ -189,36 +189,36 @@ export class UserService {
             where.createTime = Between(reqUserListDto.params.beginTime, moment(reqUserListDto.params.endTime).add(1, 'day').toDate())
         }
 
-        const deptId = reqUserListDto.deptId ?? ''
+        // const deptId = reqUserListDto.deptId ?? ''
         const queryBuilde = this.userRepository.createQueryBuilder('user') // .innerJoin(User, 'user2', "user.createBy = user2.userName")
-        if (deptId) {
-            queryBuilde.innerJoinAndSelect("user.dept", "dept", "concat('.',dept.mpath) like :v", { v: '%.' + deptId + '.%' })
-        } else {
-            queryBuilde.leftJoinAndSelect("user.dept", "dept")
-        }
-        queryBuilde.leftJoin("user.accounts", "account_usdt",)
-        queryBuilde.addSelect(['account_usdt.usable'])
-        queryBuilde.addSelect(['account_usdt.currencyId'])
-        queryBuilde.leftJoinAndSelect("user.addresses", "address", "address.isDefault = true")
+        // if (deptId) {
+        //     queryBuilde.innerJoinAndSelect("user.dept", "dept", "concat('.',dept.mpath) like :v", { v: '%.' + deptId + '.%' })
+        // } else {
+        //     queryBuilde.leftJoinAndSelect("user.dept", "dept")
+        // }
+        // queryBuilde.leftJoin("user.accounts", "account_usdt",)
+        // queryBuilde.addSelect(['account_usdt.usable'])
+        // queryBuilde.addSelect(['account_usdt.currencyId'])
+        // queryBuilde.leftJoinAndSelect("user.addresses", "address", "address.isDefault = true")
 
-        queryBuilde.leftJoinAndSelect("user.kyc", "kyc", 'kyc.status = 1')
+        // queryBuilde.leftJoinAndSelect("user.kyc", "kyc", 'kyc.status = 1')
         queryBuilde.skip(paginationDto.skip)
         queryBuilde.take(paginationDto.take)
-        if (roleId && !reverse) {
-            queryBuilde.innerJoin("user.roles", "role", "role.roleId = :roleId", { roleId })
-                .andWhere("role.delFlag = 0")
-        }
-        if (roleId && reverse) {
-            queryBuilde.andWhere(qb => {
-                const subQuery = qb.subQuery()
-                    .select('user.userId')
-                    .from(User, 'user')
-                    .leftJoin('user.roles', 'role')
-                    .where("role.roleId = :roleId", { roleId })
-                    .getQuery()
-                return "user.userId not in " + subQuery
-            })
-        }
+        // if (roleId && !reverse) {
+        //     queryBuilde.innerJoin("user.roles", "role", "role.roleId = :roleId", { roleId })
+        //         .andWhere("role.delFlag = 0")
+        // }
+        // if (roleId && reverse) {
+        //     queryBuilde.andWhere(qb => {
+        //         const subQuery = qb.subQuery()
+        //             .select('user.userId')
+        //             .from(User, 'user')
+        //             .leftJoin('user.roles', 'role')
+        //             .where("role.roleId = :roleId", { roleId })
+        //             .getQuery()
+        //         return "user.userId not in " + subQuery
+        //     })
+        // }
         // if (sataScopeSql) {
         //     queryBuilde.andWhere(sataScopeSql)
         // }
@@ -235,11 +235,11 @@ export class UserService {
         return await this.userRepository.createQueryBuilder('user')
             .leftJoinAndSelect('user.dept', 'dept', "dept.delFlag = 0")
             .leftJoinAndSelect('user.identity', 'identity')
-            .leftJoinAndSelect('user.kyc', 'kyc')
-            .leftJoinAndSelect('user.member', 'member')
+            // .leftJoinAndSelect('user.kyc', 'kyc')
+            // .leftJoinAndSelect('user.member', 'member')
             // .innerJoin('member.memberInfo', 'memberInfo')
-            .leftJoinAndSelect('user.posts', 'post')
-            .leftJoinAndSelect('user.roles', 'role', "role.delFlag = 0")
+            // .leftJoinAndSelect('user.posts', 'post')
+            // .leftJoinAndSelect('user.roles', 'role', "role.delFlag = 0")
             .where("user.userId = :userId", { userId })
             .getOne()
     }
@@ -247,14 +247,14 @@ export class UserService {
     /* 通过id 查询用户的所有信息，排除停用和删除的 */
     async findOneUserAllById(userId: number): Promise<User> {
         const user: User = await this.userRepository.createQueryBuilder('user')
-            .leftJoinAndSelect('user.dept', 'dept', "dept.delFlag = 0 and dept.status = 0")
-            .leftJoinAndSelect('user.identity', 'identity')
-            .leftJoinAndSelect('user.kyc', 'kyc')
-            .leftJoinAndSelect('user.member', 'member')
+            // .leftJoinAndSelect('user.dept', 'dept', "dept.delFlag = 0 and dept.status = 0")
+            // .leftJoinAndSelect('user.identity', 'identity')
+            // .leftJoinAndSelect('user.kyc', 'kyc')
+            // .leftJoinAndSelect('user.member', 'member')
             // .leftJoinAndSelect('member.memberInfo', 'memberInfo', 'memberInfo.id=1')
-            .leftJoinAndSelect('user.posts', 'post', "dept.status = 0")
-            .leftJoinAndSelect('user.roles', 'role', "role.delFlag = 0 and role.status = 0")
-            .leftJoinAndSelect('user.accounts', 'account',)
+            // .leftJoinAndSelect('user.posts', 'post', "dept.status = 0")
+            // .leftJoinAndSelect('user.roles', 'role', "role.delFlag = 0 and role.status = 0")
+            // .leftJoinAndSelect('user.accounts', 'account',)
             .where({
                 userId,
                 delFlag: '0',
