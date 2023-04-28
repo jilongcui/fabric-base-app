@@ -7,6 +7,7 @@ import { UserModule } from '@app/modules/user/user.module';
 import { CommonModule } from '@app/modules/common/common.module';
 import { LoginModule } from '@app/modules/login/login.module';
 import { AuthModule } from '@app/modules/auth/auth.module';
+import { FabcarModule } from '@app/modules/fabcar/fabcar.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { AuthModule } from '@app/modules/auth/auth.module';
     LoginModule,
     AuthModule,
     UserModule,
+    FabcarModule
   ],
   controllers: [],
   providers: [],
