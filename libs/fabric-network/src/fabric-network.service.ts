@@ -26,24 +26,26 @@ export class FabricNetworkService implements OnModuleInit {
     gateway: Gateway
     network: Network
     walletPath: string
+    userName: string
 
     constructor() {
         // load the network configuration
         const ccpPath = process.env.CONNECTION_PROFILE_PATH
-        const walletPath = process.env.WALLET_PATH
+        this.userName = process.env.APP_USERNAME
         const connectionProfilePath = path.resolve(ccpPath);
         this.connectionProfile = JSON.parse(fs.readFileSync(connectionProfilePath, 'utf8'));
         this.asLocalhost = true
         // const walletPath = path.join(process.cwd(), 'wallet');
-        this.walletPath = walletPath
+        this.walletPath = process.env.APP_WALLET_PATH
     }
+    
     async onModuleInit() {
 
         this.wallet = await Wallets.newFileSystemWallet(this.walletPath)
         this.gateway = new Gateway();
     
         // Check to see if we've already enrolled the user.
-        const identity = await this.wallet.get('appUser');
+        const identity = await this.wallet.get(this.userName);
         if (!identity) {
             console.log('An identity for the user "appUser" does not exist in the wallet');
             console.log('Run the registerUser.ts application before retrying');
