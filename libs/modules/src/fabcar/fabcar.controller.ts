@@ -2,7 +2,10 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { FabcarService } from './fabcar.service';
 import { CreateFabcarDto } from './dto/create-fabcar.dto';
 import { UpdateFabcarDto } from './dto/update-fabcar.dto';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiTags("Fabcar")
+@ApiBearerAuth()
 @Controller('fabcar')
 export class FabcarController {
   constructor(private readonly fabcarService: FabcarService) {}

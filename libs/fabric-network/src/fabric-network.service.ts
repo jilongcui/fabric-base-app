@@ -34,7 +34,7 @@ export class FabricNetworkService implements OnModuleInit {
         this.userName = process.env.APP_USERNAME
         const connectionProfilePath = path.resolve(ccpPath);
         this.connectionProfile = JSON.parse(fs.readFileSync(connectionProfilePath, 'utf8'));
-        this.asLocalhost = true
+        this.asLocalhost = Boolean(process.env.DISCOVERY_AS_LOCALHOST)
         // const walletPath = path.join(process.cwd(), 'wallet');
         this.walletPath = process.env.APP_WALLET_PATH
     }
